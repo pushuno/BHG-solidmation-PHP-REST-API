@@ -1,4 +1,4 @@
-# BHG solidmation API
+# BHG solidmation PHP API
 Solidmation &amp; BGH Smart Control Kit PHP REST API for air conditioner
 
 ## Usage
