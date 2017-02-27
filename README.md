@@ -1,2 +1,53 @@
-# BHG-solidmation-PHP-REST-API
+# BHG-solidmation-API
 Solidmation &amp; BGH Smart Control Kit PHP REST API for air conditioner
+
+## Usage
+
+```php
+define(BGH_USER, "XXXXX");
+define(BGH_PASS, "XXXXX");
+
+require 'bgh.class.php';
+
+$bgh = new BGH();
+/* Use this if you want to get your device list, or use another endpointID instead of first */
+$devices = $bgh->getDevices(); 
+
+$bgh->sendCommand(array(
+	"temperature" => 17,   //Set temperature, default 24
+	"fan" => 3,            //Set fan, default auto
+	"endpoint" => 39282,   //Set endpoint, default first
+	"mode" => "on"         //Set on/off, default on
+));
+```
+
+### Commands
+#### returnToken _(null)_
+Get BGH private token
+#### getHomeId _(null)_
+Get the ID of your home
+#### getDevices _(null)_
+Get a list of devices on your home, including ID, room temperature, air conditioner preset, and status
+```php
+Array
+(
+    [0] => Array
+        (
+            [endpointID] => 39282
+            [turned] => 1
+            [room] => 30.2
+            [air] => 17
+            [name] => Terraza
+            [device] => BGH Smart Control Kit
+            [homeID] => 27622
+        )
+
+)
+```
+#### sendCommand _(Array)_
+Send command to air conditioner
+
+## License
+
+MIT License
+2017, Joan Manuel Hidalgo (joanmanuehpages@gmail.com)
