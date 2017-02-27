@@ -23,6 +23,42 @@ SOFTWARE.
 */
 error_reporting(E_ERROR | E_PARSE);
 
+function get($url, $data, $method = "GET", $content = "normal", $cookies = false) {
+	$options = array(
+		'http' => array(
+			'header'  => $content == "json" ? "Content-Type: application/json\r\n"."Accept: */*; \r\n" : "Content-type: application/x-www-form-urlencoded\r\n",
+			'method'  => $method,
+			'content' => $content == "json" ? json_encode($data) : http_build_query($data),
+		),
+	);
+	$context  = stream_context_create($options);
+	$result = file_get_contents($url, false, $context);
+	if ($result === FALSE) { }
+
+	$cookies = array();
+	foreach ($http_response_header as $hdr) {
+		if (preg_match('/^Set-Cookie:\s*([^;]+)/', $hdr, $matches)) {
+			parse_str($matches[1], $tmp);
+			$cookies += $tmp;
+		}
+	}
+
+	$bearer = json_decode($result, JSON_PRETTY_PRINT);
+	if (json_last_error() === 0) {
+		if($cookies) {
+			return array($bearer, $cookies);
+		} else {
+			return $bearer;
+		}
+	} else {
+		if($cookies) {
+			return array($result, $cookies);
+		} else {
+			return $result;
+		}
+	}
+}
+
 class BGH {
 	public function returnToken() {
 		if($_COOKIE['bgh_token']) {
