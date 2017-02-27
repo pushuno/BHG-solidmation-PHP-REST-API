@@ -4,8 +4,8 @@ Solidmation &amp; BGH Smart Control Kit PHP REST API for air conditioner
 ## Usage
 
 ```php
-define(BGH_USER, "XXXXX");
-define(BGH_PASS, "XXXXX");
+define(BGH_USER, "XXXXX"); //Login email
+define(BGH_PASS, "XXXXX"); //Login password
 
 require 'bgh.class.php';
 
@@ -50,4 +50,5 @@ Send command to air conditioner
 ## License
 
 MIT License
+
 2017, Joan Manuel Hidalgo (joanmanuehpages@gmail.com)
