@@ -1,3 +1,4 @@
+<?php
 /*MIT License
 
 Copyright (c) 2017 Joan Manuel Hidalgo (joanmanuelhpages@gmail.com)
@@ -77,3 +78,4 @@ class BGH {
 		return $response['HVACSetModesResult']['Result'];
 	}
 }
+?>
