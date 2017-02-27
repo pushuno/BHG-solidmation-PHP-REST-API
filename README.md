@@ -10,7 +10,7 @@ define(BGH_PASS, "XXXXX"); //Login password
 require 'bgh.class.php';
 
 $bgh = new BGH();
-/* Use this if you want to get your device list, or use another endpointID instead of first */
+/* Use this if you want to get your device list or use another endpointID instead of first */
 $devices = $bgh->getDevices(); 
 
 $bgh->sendCommand(array(
