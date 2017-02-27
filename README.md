@@ -15,9 +15,24 @@ $devices = $bgh->getDevices();
 
 $bgh->sendCommand(array(
 	"temperature" => 17,   //Set temperature, default 24
-	"fan" => 3,            //Set fan, default auto
-	"endpoint" => 39282,   //Set endpoint, default first
+	"fan" => 3,            //Set 1-3 (254 for auto), default auto
+	"endpoint" => 39282,   //Set endpoint, default first endpoint
 	"mode" => "on"         //Set on/off, default on
+));
+
+/* Turn on and set it to 19° */
+$bgh->sendCommand(array(
+	"temperature" => 19
+));
+
+/* Turn fan on max */
+$bgh->sendCommand(array(
+	"fan" => 3
+));
+
+/* Turn off */
+$bgh->sendCommand(array(
+	"mode" => "off"
 ));
 ```
 
