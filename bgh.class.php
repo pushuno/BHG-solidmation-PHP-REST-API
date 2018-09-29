@@ -107,9 +107,14 @@ class BGH {
 	public function sendCommand($ops) {
 		$temperature = $ops["temperature"] ? $ops["temperature"] : 24;
 		$fan = $ops["fan"] ? $ops["fan"] : 254;
+		switch($ops["mode"]){
+		   case 'on': $mode = 1; break;
+		   case 'off': $mode = 0; break;
+		   default: $mode = $ops["mode"];
+		}
 		$mode = $ops["mode"] ? $ops["mode"] : "on";
 		$endpoint = $ops['endpoint'] ? $ops['endpoint'] : $this->getDevices()[0]['endpointID'];
-		$turnData = '{"token":{"Token":"'.$this->returnToken().'"},"endpointID":'.$endpoint.',"desiredTempC":"'.$temperature.'","mode":"'.(($mode == "on")?1:0).'","fanMode":"'.$fan.'","flags":255}';
+		$turnData = '{"token":{"Token":"'.$this->returnToken().'"},"endpointID":'.$endpoint.',"desiredTempC":"'.$temperature.'","mode":"'.$mode.'","fanMode":"'.$fan.'","flags":255}';
 		$response = get("https://bgh-services.solidmation.com/1.0/HomeCloudCommandService.svc/HVACSetModes", json_decode($turnData), "POST", "json");
 		
 		return $response['HVACSetModesResult']['Result'];
